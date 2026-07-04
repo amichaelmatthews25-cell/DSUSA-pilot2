@@ -1,0 +1,29 @@
+{
+  "name": "dsusa-platform",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Drive Society USA platform monorepo. F0 foundation: shared libraries + auth substrate.",
+  "type": "module",
+  "scripts": {
+    "test": "node --experimental-strip-types --test libs/types/test/*.test.ts libs/auth-kit/test/*.test.ts libs/idempotency-kit/test/*.test.ts libs/audit-kit/test/*.test.ts platform/audit/test/*.test.ts platform/event/test/*.test.ts platform/authorization/test/*.test.ts platform/rules/test/*.test.ts platform/workflow/test/*.test.ts",
+    "test:f0": "node --experimental-strip-types --test libs/types/test/*.test.ts libs/auth-kit/test/*.test.ts libs/idempotency-kit/test/*.test.ts libs/audit-kit/test/*.test.ts",
+    "verify:f0": "node --experimental-strip-types ops/verify/verify-f0.ts",
+    "migrate:check": "node --experimental-strip-types ops/verify/check-migrations.ts",
+    "test:audit": "node --experimental-strip-types --test platform/audit/test/*.test.ts",
+    "verify:audit": "node --experimental-strip-types ops/verify/verify-audit.ts",
+    "test:event": "node --experimental-strip-types --test platform/event/test/*.test.ts",
+    "verify:event": "node --experimental-strip-types ops/verify/verify-event.ts",
+    "test:authz": "node --experimental-strip-types --test platform/authorization/test/*.test.ts",
+    "verify:authz": "node --experimental-strip-types ops/verify/verify-authz.ts",
+    "test:rules": "node --experimental-strip-types --test platform/rules/test/*.test.ts",
+    "verify:rules": "node --experimental-strip-types ops/verify/verify-rules.ts",
+    "test:workflow": "node --experimental-strip-types --test platform/workflow/test/*.test.ts",
+    "verify:workflow": "node --experimental-strip-types ops/verify/verify-workflow.ts",
+    "verify:consistency": "node --experimental-strip-types ops/verify/verify-consistency.ts"
+  },
+  "devDependencies": {
+    "tsx": "4.19.2",
+    "typescript": "5.6.3",
+    "@types/node": "22.7.5"
+  }
+}

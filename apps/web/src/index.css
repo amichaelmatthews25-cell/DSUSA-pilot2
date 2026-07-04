@@ -1,0 +1,19 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Fraunces:opsz,wght@9..144,500;9..144,600&display=swap');
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  html { -webkit-font-smoothing: antialiased; }
+  body { @apply bg-canvas text-ink font-sans; }
+}
+
+@layer components {
+  .card { @apply bg-canvas-panel border border-canvas-line rounded-xl2 shadow-card; }
+  .eyebrow { @apply text-xs font-semibold uppercase tracking-wider text-ink-muted; }
+  .btn { @apply inline-flex items-center justify-center gap-2 rounded-lg px-4 py-2.5 text-sm font-semibold transition-colors; }
+  .btn-primary { @apply btn bg-brand text-white hover:bg-brand-deep; }
+  .btn-ghost { @apply btn border border-canvas-line text-ink-soft hover:bg-canvas; }
+  .stat { @apply text-3xl font-display font-semibold text-ink; }
+  .pill { @apply inline-flex items-center gap-1.5 rounded-full px-2.5 py-1 text-xs font-medium; }
+}
