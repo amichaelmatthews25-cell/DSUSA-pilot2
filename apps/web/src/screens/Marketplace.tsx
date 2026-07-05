@@ -9,8 +9,7 @@ import { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import { useData } from "../data/context.tsx";
 import type { FreightLoad } from "../data/domain.ts";
-import { JourneyTracker, SectionTitle, NextStep, money, PagePurpose } from "../components/ui.tsx";
-
+import { JourneyTracker, NextStep, money, PagePurpose } from "../components/ui.tsx";
 type Filter = "all" | "compatible" | "high_value";
 const ACTIVE: FreightLoad["status"][] = ["assigned", "in_transit", "delivered", "payment_pending"];
 
