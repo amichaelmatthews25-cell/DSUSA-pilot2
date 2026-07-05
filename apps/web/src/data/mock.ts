@@ -9,6 +9,8 @@ import type { DataProvider } from "./provider.ts";
 import type {
   ApplicationDraft, BusinessPlan, Entrepreneur, EntrepreneurDashboard, FreightLoad,
   FundingStatus, PaymentWaterfall, ReferralPartner, ServicePartner, VehicleAssignment,
+  ReferralImpact, LenderDashboardData, InsuranceDashboardData, FreightPartnerDashboardData,
+  ServiceEcosystemEntry, BusinessContinuityStatus, BusinessContinuityCapability,
 } from "./domain.ts";
 
 let idSeq = 100;
@@ -126,19 +128,19 @@ export class MockDataProvider implements DataProvider {
     return this.loads.map((l) => ({ ...l }));
   }
   async acceptLoad(entrepreneurId: string, loadId: string): Promise<FreightLoad> {
-    const load = this.loads.find((l) => l.id === loadId);
-    if (!load) throw new Error(`unknown load ${loadId}`);
-    load.status = "assigned" as FreightLoad["status"];
+    const idx = this.loads.findIndex((l) => l.id === loadId);
+    if (idx === -1) throw new Error(`unknown load ${loadId}`);
+    this.loads[idx] = { ...this.loads[idx]!, status: "assigned" };
     this.acceptedLoadByEntrepreneur.set(entrepreneurId, loadId);
-    return { ...load };
+    return { ...this.loads[idx]! };
   }
   async advanceLoad(loadId: string): Promise<FreightLoad> {
-    const load = this.loads.find((l) => l.id === loadId);
-    if (!load) throw new Error(`unknown load ${loadId}`);
+    const idx = this.loads.findIndex((l) => l.id === loadId);
+    if (idx === -1) throw new Error(`unknown load ${loadId}`);
     const flow: FreightLoad["status"][] = ["available", "assigned", "in_transit", "delivered", "payment_pending", "completed"];
-    const i = flow.indexOf(load.status);
-    load.status = flow[Math.min(i + 1, flow.length - 1)]!;
-    return { ...load };
+    const i = flow.indexOf(this.loads[idx]!.status);
+    this.loads[idx] = { ...this.loads[idx]!, status: flow[Math.min(i + 1, flow.length - 1)]! };
+    return { ...this.loads[idx]! };
   }
 
   async getWaterfall(loadId: string): Promise<PaymentWaterfall> {
